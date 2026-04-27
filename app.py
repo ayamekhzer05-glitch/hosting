@@ -27,12 +27,14 @@ GEMINI_API_KEY = "AIzaSyAdCHe5rnn1hCPbazZdRxCTtvrF_5Oirks"
 
 app = Flask(__name__, template_folder=template_dir)
 app.secret_key = "stagio_2026_super_secret"
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'internship_platform'
+
+
+app.config['MYSQL_HOST'] = os.environ.get("MYSQL_HOST")
+app.config['MYSQL_USER'] = os.environ.get("MYSQL_USER")
+app.config['MYSQL_PASSWORD'] = os.environ.get("MYSQL_PASSWORD")
+app.config['MYSQL_DB'] = os.environ.get("MYSQL_DB")
+app.config['MYSQL_PORT'] = int(os.environ.get("MYSQL_PORT", 3306))
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-mysql = MySQL(app)
 
 app.register_blueprint(company_bp, url_prefix='/company')
 app.register_blueprint(admin_bp, url_prefix='/admin')
