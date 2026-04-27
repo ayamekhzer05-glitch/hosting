@@ -35,6 +35,7 @@ app.config['MYSQL_PASSWORD'] = os.environ.get("MYSQL_PASSWORD")
 app.config['MYSQL_DB'] = os.environ.get("MYSQL_DB")
 app.config['MYSQL_PORT'] = int(os.environ.get("MYSQL_PORT", 3306))
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+mysql = MySQL(app)
 
 app.register_blueprint(company_bp, url_prefix='/company')
 app.register_blueprint(admin_bp, url_prefix='/admin')
